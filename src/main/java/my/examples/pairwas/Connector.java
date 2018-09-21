@@ -12,9 +12,8 @@ public class Connector extends Thread{
     private Set<InetAddress> InetAddresses = new HashSet<>();
     private DefaultServlet defaultServlet;
 
-    public Connector(int port, DefaultServlet defaultServlet){
+    public Connector(int port){
         this.port = port;
-        this.defaultServlet = defaultServlet;
     }
 
     @Override
@@ -37,6 +36,11 @@ public class Connector extends Thread{
 
         }catch (IOException ioe){
             ioe.printStackTrace();
+        }
+        finally {
+            try{
+                serverSocket.close();
+            }catch (IOException ex){}
         }
     }
 
